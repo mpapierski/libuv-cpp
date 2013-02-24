@@ -25,12 +25,15 @@ INCLUDE_DIRECTORIES (${CMAKE_CURRENT_SOURCE_DIR}/include)
 SET (SOURCES
 	src/event_loop.cpp
 	src/dns.cpp
+	src/network.cpp
 )
 
 ADD_LIBRARY (uv++
 	${SOURCES})
 TARGET_LINK_LIBRARIES (uv++
 	uv)
+
+ADD_SUBDIRECTORY (examples)
 
 ENABLE_TESTING ()
 ADD_SUBDIRECTORY (tests)

@@ -22,7 +22,6 @@ public:
 	 * Construct new event loop.
 	 */
 	event_loop() throw(std::bad_alloc);
-	event_loop(event_loop const &) = delete;
 	/**
 	 * Run event loop.
 	 * @param mode Set to UV_RUN_DEFAULT, UV_RUN_ONCE, or UV_RUN_NOWAIT.

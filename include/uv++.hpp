@@ -3,5 +3,6 @@
 
 #include <uv++/event_loop.hpp>
 #include <uv++/dns.hpp>
+#include <uv++/network.hpp>
 
 #endif /* UVPLUSPLUS_INCLUDED_H_ */
