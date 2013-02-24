@@ -19,8 +19,3 @@ std::string uv::event_loop::last_error() const
 {
 	return ::uv_err_name(::uv_last_error(this->loop_.get()));
 }
-
-uv::event_loop::weak_pointer_type uv::event_loop::weak() const
-{
-	return loop_;
-}
