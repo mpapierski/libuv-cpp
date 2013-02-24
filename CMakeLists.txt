@@ -24,6 +24,7 @@ INCLUDE_DIRECTORIES (${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 SET (SOURCES
 	src/event_loop.cpp
+	src/dns.cpp
 )
 
 ADD_LIBRARY (uv++

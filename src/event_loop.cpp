@@ -1,9 +1,7 @@
 #include <uv++/event_loop.hpp>
 
-using namespace uv;
-
-event_loop::event_loop() throw(std::bad_alloc)
-	: loop_(uv_loop_new(), destructor())
+uv::event_loop::event_loop() throw(std::bad_alloc)
+	: loop_(uv_loop_new(), &::uv_loop_delete)
 {
 	if (!loop_)
 	{
@@ -11,8 +9,18 @@ event_loop::event_loop() throw(std::bad_alloc)
 	}
 }
 
-void event_loop::run(uv_run_mode mode) throw()
+void uv::event_loop::run(uv_run_mode mode) throw()
 {
 	assert(loop_ && "Unable to run event loop.");
 	::uv_run(loop_.get(), mode);
+}
+
+std::string uv::event_loop::last_error() const
+{
+	return ::uv_err_name(::uv_last_error(this->loop_.get()));
+}
+
+uv::event_loop::weak_pointer_type uv::event_loop::weak() const
+{
+	return loop_;
 }
