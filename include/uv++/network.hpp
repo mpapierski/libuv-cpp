@@ -3,6 +3,8 @@
 
 namespace uv {
 
+class server;
+
 /**
  * Create new IPv4 address.
  */
@@ -10,15 +12,20 @@ class ip4_address
 {
 private:
 	struct sockaddr_in bind_addr_;
+	friend class server;
 public:
 	ip4_address(std::string const & address, unsigned short port);
 };
 
-struct server
+class server
 {
+private:
 	event_loop loop_;
-	server(event_loop ev);
-	void listen(std::function<void()> callback = std::function<void()>());
+	uv_tcp_t server_;
+public:
+	server(event_loop const & ev);
+	void listen(ip4_address addr, std::function<void()> callback = std::function<void()>());
+	static void on_new_connection(uv_stream_t *server, int status);
 };
 
 }
